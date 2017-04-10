@@ -13,9 +13,11 @@
       <li ng-repeat="user in users">
         id: {{user.Id}} <br>
         name: {{user.Name}}-
-        <a ng-click="goToBoard(user)">Ir</a>
+        <a ng-click="getBoard(user)">Ir</a>
         <hr>
       </li>
     </ul>
+    <h3>Board del usuario: {{selectedUser.Name}}</h3>
+    <h4>Nombre del board: {{selectedBoard.Name}}</h4>
   </body>
 </html>
