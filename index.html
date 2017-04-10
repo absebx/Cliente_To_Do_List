@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html ng-app>
+  <head>
+    <meta charset="utf-8">
+    <title>usuarios</title>
+    <script type="text/javascript" src="angular.min.js"></script>
+    <script src="controller.js"></script>
+  </head>
+  <body ng-controller="userController">
+    <h1>Bienvenido To Do List ++</h1>
+    <h2>Seleccione el usuario que quiere ver</h2>
+    <ul>
+      <li ng-repeat="user in users">
+        id: {{user.Id}} <br>
+        name: {{user.Name}}
+        <hr>
+      </li>
+    </ul>
+  </body>
+</html>
