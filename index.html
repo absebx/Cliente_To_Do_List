@@ -1,18 +1,19 @@
 <!DOCTYPE html>
-<html ng-app>
+<html ng-app="indexApp">
   <head>
     <meta charset="utf-8">
     <title>usuarios</title>
     <script type="text/javascript" src="angular.min.js"></script>
     <script src="controller.js"></script>
   </head>
-  <body ng-controller="userController">
+  <body ng-controller="indexController">
     <h1>Bienvenido To Do List ++</h1>
     <h2>Seleccione el usuario que quiere ver</h2>
     <ul>
       <li ng-repeat="user in users">
         id: {{user.Id}} <br>
-        name: {{user.Name}}
+        name: {{user.Name}}-
+        <a ng-click="goToBoard(user)">Ir</a>
         <hr>
       </li>
     </ul>
