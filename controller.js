@@ -27,12 +27,12 @@ angular.module("indexApp",[])
           //obtener tickets del board
           $http.get("http://localhost:27697/api/tickets/"+0/*$scope.selectedBoard.Id*/)
             .then(function(data){
-              console.log(data.data);
+              //se guardan tickets en arreglo
+              $scope.tickets=data.data;
             },function(err){
               console.log(err);
             });
           //*-fin obtener tickets del board-*
-
         },function(err){
           console.log(err);
         });
