@@ -5,6 +5,8 @@ angular.module("indexApp",[])
     $scope.selectedUser={};
     $scope.selectedBoard={};
     $scope.tickets={};
+    $scope.newTicket={};
+    $scope.date=new Date();
     //obtener usuarios de la base de datos
     $http.get("http://localhost:27697/api/users")
       .then(function(data){
@@ -21,6 +23,7 @@ angular.module("indexApp",[])
         .then(function(data){
           //seleccionar board
           $scope.selectedBoard=data.data;
+
           //obtener tickets del board
           $http.get("http://localhost:27697/api/tickets/"+0/*$scope.selectedBoard.Id*/)
             .then(function(data){
@@ -28,6 +31,25 @@ angular.module("indexApp",[])
             },function(err){
               console.log(err);
             });
+          //*-fin obtener tickets del board-*
+
+        },function(err){
+          console.log(err);
+        });
+    }
+
+    $scope.addTicket = function(){
+      $scope.date=new Date();
+      $http.post("http://localhost:27697/api/tickets",{
+        Id: 1,
+        Title: $scope.newTicket.Title,
+        Description: $scope.newTicket.Description,
+        Date: $scope.date,
+        EstimatedTime: $scope.newTicket.EstimatedTime,
+        BoardID: $scope.selectedBoard.Id
+      })
+        .then(function(data){
+          console.log(data);
         },function(err){
           console.log(err);
         });
