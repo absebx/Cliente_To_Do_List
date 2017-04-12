@@ -30,39 +30,36 @@
       </div>
     </div>
     <!--Main page-->
-    <div class="container main-container">
+    <div class="container-fluid main-container">
       <row>
         <!--Aside-->
-        <div class="col-sm-4 col-md-4">
-
+        <div class="col-sm-4 col-md-4 aside">
+          <h4>Seleccione usuario</h4>
+          <ul class="list-group">
+            <li class="list-group-item" ng-repeat="user in users">
+              <div class="text-left">
+                <strong>{{user.Name}}</strong>
+              </div>
+              <div  class="text-right">
+                <a ng-click="getBoard(user)" class="btn btn-primary">Ir</a>
+              </div>
+            </li>
+          </ul>
         </div>
         <!--Content-->
         <div class="col-sm-8 col-md-8">
+          <h4>{{selectedBoard.Name}}</h4>
+          <div>
 
+            <input type="text" ng-model="newTicket.Title" placeholder="Titulo"><br>
+            <textarea  ng-model="newTicket.Description" placeholder="Descripcion"></textarea><br>
+            <input type="number" ng-model="newTicket.EstimatedTime"><br>
+            <button ng-click="addTicket()">addTicket</button>
+          </div>
         </div>
       </row>
-      <h2>Seleccione el usuario que quiere ver</h2>
-      <ul>
-        <li ng-repeat="user in users">
-          id: {{user.Id}} <br>
-          name: {{user.Name}}-
-          <a ng-click="getBoard(user)">Ir</a>
-          <hr>
-        </li>
-      </ul>
-      <h3>Board del usuario: {{selectedUser.Name}}</h3>
-      <h4>Nombre del board: {{selectedBoard.Name}}</h4>
-      <div>
-        <input type="text" ng-model="newTicket.Title" placeholder="Titulo"><br>
-        <textarea rows="8" cols="80" ng-model="newTicket.Description" placeholder="Descripcion"></textarea><br>
-        <input type="number" ng-model="newTicket.EstimatedTime"><br>
-        <button ng-click="addTicket()">addTicket</button>
-      </div>
-      <div>
-
-      </div>
     </div>
-    
+
   </body>
   <!--Jquery y bootstrap-->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
