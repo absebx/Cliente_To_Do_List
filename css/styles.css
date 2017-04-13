@@ -3,3 +3,9 @@
 
 .aside {
   background-color: #EEE5E9; }
+
+.ticket {
+  height: 160px; }
+
+.ticket-description {
+  overflow-y: hidden; }

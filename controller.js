@@ -25,7 +25,7 @@ angular.module("indexApp",[])
           $scope.selectedBoard=data.data;
 
           //obtener tickets del board
-          $http.get("http://localhost:27697/api/tickets/"+0/*$scope.selectedBoard.Id*/)
+          $http.get("http://localhost:27697/api/tickets/"+$scope.selectedBoard.Id)
             .then(function(data){
               //se guardan tickets en arreglo
               $scope.tickets=data.data;
