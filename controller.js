@@ -23,21 +23,24 @@ angular.module("indexApp",[])
         .then(function(data){
           //seleccionar board
           $scope.selectedBoard=data.data;
-
-          //obtener tickets del board
-          $http.get("http://localhost:27697/api/tickets/"+$scope.selectedBoard.Id)
-            .then(function(data){
-              //se guardan tickets en arreglo
-              $scope.tickets=data.data;
-            },function(err){
-              console.log(err);
-            });
-          //*-fin obtener tickets del board-*
+          //obtener tickets
+          $scope.tickets = $scope.addTicket();
         },function(err){
           console.log(err);
         });
     }
 
+    //funcion para obtener los tickets de un board
+    $scope.getTicketByBoard = function(){
+      $http.get("http://localhost:27697/api/tickets/byBoard/"+$scope.selectedBoard.Id)
+        .then(function(data){
+          return data.data;
+        },function(err){
+          console.log(err);
+        });
+    }
+    
+    //funcion para agregar tickets en base al usuario y board seleccionado
     $scope.addTicket = function(){
       $scope.date=new Date();
       $http.post("http://localhost:27697/api/tickets",{
@@ -50,9 +53,12 @@ angular.module("indexApp",[])
       })
         .then(function(data){
           $scope.newTicket={};
+          console.log(data)
         },function(err){
           console.log(err);
         });
     }
+
+
 
   });
