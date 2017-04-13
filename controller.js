@@ -19,7 +19,7 @@ angular.module("indexApp",[])
     $scope.getBoard = function(user){
       $scope.selectedUser = user;
       //llamar a api por el board
-      $http.get("http://localhost:27697/api/boards/"+user.Id)
+      $http.get("http://localhost:27697/api/boards/byuser/"+user.Id)
         .then(function(data){
           //seleccionar board
           $scope.selectedBoard=data.data;
