@@ -25,7 +25,9 @@ angular.module("indexApp",[])
           $scope.selectedBoard=data.data;
           //obtener tickets
           $scope.getTicketByBoard();
-
+          //obtener relaciones por tickets
+          $scope.getTicketRelations();
+          //obtener status por ticket
         },function(err){
           console.log(err);
         });
@@ -39,6 +41,19 @@ angular.module("indexApp",[])
         },function(err){
           console.log(err);
         });
+    }
+
+    //funcion para obtener relaciones por tickets
+    $scope.getTicketRelations = function(){
+      console.log($scope.tickets);
+      for(var key in $scope.tickets){
+        var obj = $scope.tickets[key];
+        for (var prop in obj){
+          if(obj.hasOwnProperty(prop)){
+            console.log(prop + "="+obj[prop]);
+          }
+        }
+      }
     }
 
     //funcion para agregar tickets en base al usuario y board seleccionado
