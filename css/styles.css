@@ -5,7 +5,8 @@
   background-color: #EEE5E9; }
 
 .ticket {
-  height: 160px; }
+  height: 200px; }
 
 .ticket-description {
-  overflow-y: hidden; }
+  overflow-y: auto;
+  height: 60px; }

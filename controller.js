@@ -49,7 +49,7 @@ angular.module("indexApp",[])
         BoardID: $scope.selectedBoard.Id
       })
         .then(function(data){
-          console.log(data);
+          $scope.newTicket={};
         },function(err){
           console.log(err);
         });
