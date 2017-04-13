@@ -24,7 +24,8 @@ angular.module("indexApp",[])
           //seleccionar board
           $scope.selectedBoard=data.data;
           //obtener tickets
-          $scope.tickets = $scope.addTicket();
+          $scope.getTicketByBoard();
+
         },function(err){
           console.log(err);
         });
@@ -34,12 +35,12 @@ angular.module("indexApp",[])
     $scope.getTicketByBoard = function(){
       $http.get("http://localhost:27697/api/tickets/byBoard/"+$scope.selectedBoard.Id)
         .then(function(data){
-          return data.data;
+          $scope.tickets = data.data;
         },function(err){
           console.log(err);
         });
     }
-    
+
     //funcion para agregar tickets en base al usuario y board seleccionado
     $scope.addTicket = function(){
       $scope.date=new Date();
@@ -52,8 +53,10 @@ angular.module("indexApp",[])
         BoardID: $scope.selectedBoard.Id
       })
         .then(function(data){
+          //dejar ticket en blanco
           $scope.newTicket={};
-          console.log(data)
+          //Cargar otra vez el board
+          $scope.getBoard($scope.selectedUser);
         },function(err){
           console.log(err);
         });
