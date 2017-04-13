@@ -65,12 +65,26 @@
             </div>
             <!--Formulario nuevo ticket-->
             <div>
-              <input type="text" ng-model="newTicket.Title" placeholder="Titulo"><br>
-              <textarea  ng-model="newTicket.Description" placeholder="Descripcion"></textarea><br>
-              <input type="number" ng-model="newTicket.EstimatedTime"><br>
-              <button ng-click="addTicket()">addTicket</button>
+              <div class="col-sm-12 col-md-12">
+                <div class="panel panel-primary">
+                  <div class="panel-heading text-center"><strong>Ingresar nuevo</strong></div>
+                  <div class="panel-body">
+                    <div class="form-group">
+                      <input type="text" ng-model="newTicket.Title" placeholder="Titulo" class="form-control">
+                    </div>
+                    <div class="form-group">
+                      <textarea  ng-model="newTicket.Description" placeholder="Descripcion" class="form-control"></textarea>
+                    </div>
+                    <div class="form-group">
+                      <input type="number" ng-model="newTicket.EstimatedTime" class="form-control" placeholder="Tiempo estimado">
+                    </div>
+                    <div class="text-right">
+                      <button ng-click="addTicket()" class="btn btn-default">Agregar</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
-
         </div>
       </row>
     </div>
