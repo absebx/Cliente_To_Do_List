@@ -34,9 +34,13 @@
   color: #ED4337;
   cursor: pointer; }
 
-.panel-heading {
+.ticket-heading {
   height: 60px;
   overflow: hidden; }
+
+.btn-modificar:hover {
+  cursor: pointer;
+  background-color: #AF9B46; }
 
 .btn-agregar {
   margin-bottom: 10px;

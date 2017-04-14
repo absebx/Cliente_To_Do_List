@@ -16,12 +16,14 @@ angular.module("indexApp",[])
     //datos seleccionados
     $scope.selectedUser={};
     $scope.selectedBoard={};
+    $scope.selectedTicket={};
     $scope.tickets={};
     $scope.newTicket={};
     $scope.date=new Date();
     //datos de Utilidades
     $scope.showIngresar = false;
     $scope.showBtnIngresar = false;
+    $scope.showModificar = false;
     //obtener usuarios de la base de datos
     $http.get("http://localhost:27697/api/users")
       .then(function(data){
@@ -102,4 +104,12 @@ angular.module("indexApp",[])
           console.log(err);
         });
     }
+
+    $scope.modify = function(ticket){
+      $scope.selectedTicket = ticket;
+      console.log($scope.selectedTicket);
+      $scope.showModificar = true;
+    }
+
+
   });

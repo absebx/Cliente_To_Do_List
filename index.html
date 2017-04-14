@@ -52,9 +52,10 @@
 
             <!--Mostrar todos los tickets-->
             <div class="tickets row">
+              <!--Ticket-->
               <div class="col-sm-6 col-md-4" ng-repeat="ticket in tickets">
                 <div class="panel panel-default">
-                  <div class="panel-heading">
+                  <div class="panel-heading ticket-heading">
                     <span class="ticket-title text-primary">
                       {{ticket.Title}}
                     </span>
@@ -68,15 +69,40 @@
                       {{ticket.Description}}
                     </p>
                     <p class="text-right">Tiempo estimado: {{ticket.EstimatedTime}}</p>
-                    <p class="text-right">
-                      <span class="label label-default ticket-status" color-status="{{ticket.ColorStatus}}">
+                    <p class="">
+                      <a class="label label-warning todo-text-left btn-modificar" ng-click="modify(ticket)">
+                        Editar
+                      </a>
+                      <span class="label label-default ticket-status todo-text-right" color-status="{{ticket.ColorStatus}}">
                         {{ticket.StatusName}}
                       </span>
                     </p>
                   </div>
                 </div>
               </div>
+              <!--Fin ticket-->
             </div>
+
+            <!--Formulario modificar ticket-->
+            <div class="col-sm-12 col-md-12" ng-show="showModificar">
+              <div class="panel panel-warning">
+                <div class="panel-heading">
+                  <strong>Modificar: {{selectedTicket.Title}}</strong>
+                </div>
+                <div class="panel-body">
+                  <div class="form-group">
+                    <textarea placeholder="Descripcion" class="form-control">
+                      {{selectedTicket.Description}}
+                    </textarea>
+                  </div>
+                  <div class="text-right">
+                    <button class="btn btn-warning">Modificar</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!--Fin formulario modificar ticket-->
+
             <!--Formulario nuevo ticket-->
             <button class="btn btn-primary btn-agregar" ng-click="showIngresar=!showIngresar" ng-show="showBtnIngresar">
               Agregar
@@ -100,6 +126,9 @@
                 </div>
               </div>
             </div>
+            <!--Fin formulario nuevo ticket-->
+
+
         </div><!--Div del contenido-->
       </row><!--Row principal-->
     </div><!--Main container-->
