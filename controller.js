@@ -17,9 +17,11 @@ angular.module("indexApp",[])
     $scope.selectedUser={};
     $scope.selectedBoard={};
     $scope.selectedTicket={};
+    $scope.selectedTicketRelation={};
     $scope.tickets={};
     $scope.newTicket={};
     $scope.date=new Date();
+    $scope.allStatus={};
     //datos de Utilidades
     $scope.showIngresar = false;
     $scope.showBtnIngresar = false;
@@ -28,6 +30,14 @@ angular.module("indexApp",[])
     $http.get("http://localhost:27697/api/users")
       .then(function(data){
         $scope.users=data.data;
+      },function(err){
+        console.log(err);
+      });
+
+    //obtener estados de la base de datos
+    $http.get("http://localhost:27697/api/status")
+      .then(function(data){
+        $scope.allStatus=data.data;
       },function(err){
         console.log(err);
       });
@@ -61,8 +71,9 @@ angular.module("indexApp",[])
     }
 
     //funcion para obtener relaciones por tickets
-    //funcion no utilizada
-    $scope.getTicketRelations = function(){
+    //*IMPORTANTE*: funcion no utilizada
+
+    /*$scope.getTicketRelations = function(){
       console.log($scope.tickets);
       for(var key in $scope.tickets){
         var obj = $scope.tickets[key];
@@ -73,6 +84,8 @@ angular.module("indexApp",[])
         }
       }
     }
+    */
+
 
     //funcion para agregar tickets en base al usuario y board seleccionado
     $scope.addTicket = function(){
@@ -97,6 +110,7 @@ angular.module("indexApp",[])
         });
     }
 
+    //funcion para eliminar ticket
     $scope.deleteTicket = function(id){
       $http.delete("http://localhost:27697/api/tickets/"+id)
         .then(function(data){
@@ -107,11 +121,17 @@ angular.module("indexApp",[])
         });
     }
 
+    //funcion para seleccionar ticket y moficarlo
     $scope.modify = function(ticket){
+      //seleccionar ticket
       $scope.selectedTicket = ticket;
+      //mostrar formulario modificar
       $scope.showModificar = true;
+      //obtener relacion con el ticket
+      $scope.getTicketRelation(ticket.Id);
     }
 
+    //funcion para modificar ticket seleccionado
     $scope.editTicket = function(){
       //enviar por put los datos del ticket
       $http.put("http://localhost:27697/api/tickets/"+$scope.selectedTicket.Id,{
@@ -136,6 +156,19 @@ angular.module("indexApp",[])
           console.log(err);
         });
     }
+
+    $scope.getTicketRelation=function(id){
+      //llamar api para obtener relacion por id del ticket
+      $http.get("http://localhost:27697/api/ticketstatus/byticket/"+id)
+        .then(function(data){
+          $scope.selectedTicketRelation = data.data;
+          console.log($scope.selectedTicketRelation);
+        },function(err){
+          console.log(err);
+        });
+    }
+
+
 
 
   });
