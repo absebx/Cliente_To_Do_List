@@ -53,12 +53,17 @@
             <!--Mostrar todos los tickets-->
             <div class="tickets row">
               <div class="col-sm-6 col-md-6" ng-repeat="ticket in tickets">
-                <div class="thumbnail ticket">
-                  <div class="caption">
-                    <h3 class="text-primary">{{ticket.Title}}</h3>
+                <div class="panel panel-default ticket">
+                  <div class="panel-heading">
+                    <h4 class="text-primary ticket-title">{{ticket.Title}}</h4>
+                  </div>
+                  <div class="panel-body">
                     <p class="text-right">{{ticket.Date | date: 'd/M/yyyy'}}</p>
                     <p class="ticket-description">{{ticket.Description}}</p>
                     <p class="text-right">Tiempo estimado: {{ticket.EstimatedTime}}</p>
+                    <p class="text-right">
+                      <span class="label label-default ticket-status">{{ticket.StatusName}}</span>
+                    </p>
                   </div>
                 </div>
               </div>

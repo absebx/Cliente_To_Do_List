@@ -25,9 +25,6 @@ angular.module("indexApp",[])
           $scope.selectedBoard=data.data;
           //obtener tickets
           $scope.getTicketByBoard();
-          //obtener relaciones por tickets
-          $scope.getTicketRelations();
-          //obtener status por ticket
         },function(err){
           console.log(err);
         });
@@ -44,6 +41,7 @@ angular.module("indexApp",[])
     }
 
     //funcion para obtener relaciones por tickets
+    //funcion no utilizada
     $scope.getTicketRelations = function(){
       console.log($scope.tickets);
       for(var key in $scope.tickets){

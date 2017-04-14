@@ -5,8 +5,14 @@
   background-color: #EEE5E9; }
 
 .ticket {
-  height: 200px; }
+  height: 250px; }
 
 .ticket-description {
   overflow-y: auto;
-  height: 60px; }
+  height: 90px; }
+
+.ticket-title {
+  margin: 0; }
+
+.ticket-status {
+  font-weight: bold; }
