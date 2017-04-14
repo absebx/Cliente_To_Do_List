@@ -4,6 +4,12 @@
 .aside {
   background-color: #EEE5E9; }
 
+.todo-text-right {
+  float: right; }
+
+.todo-text-left {
+  float: left; }
+
 .ticket {
   height: 200px; }
 
@@ -31,3 +37,7 @@
 .panel-heading {
   height: 60px;
   overflow: hidden; }
+
+.btn-agregar {
+  margin-bottom: 10px;
+  margin-left: 15px; }

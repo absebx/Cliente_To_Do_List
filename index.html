@@ -64,7 +64,9 @@
                   </div>
                   <div class="panel-body ticket">
                     <p class="text-right">{{ticket.Date | date: 'd/M/yyyy'}}</p>
-                    <p class="ticket-description">{{ticket.Description}}</p>
+                    <p class="ticket-description">
+                      {{ticket.Description}}
+                    </p>
                     <p class="text-right">Tiempo estimado: {{ticket.EstimatedTime}}</p>
                     <p class="text-right">
                       <span class="label label-default ticket-status" color-status="{{ticket.ColorStatus}}">
@@ -76,8 +78,11 @@
               </div>
             </div>
             <!--Formulario nuevo ticket-->
+            <button class="btn btn-primary btn-agregar" ng-click="showIngresar=!showIngresar" ng-show="showBtnIngresar">
+              Agregar
+            </button>
             <div class="col-sm-12 col-md-12">
-              <div class="panel panel-primary">
+              <div class="panel panel-primary animated" ng-show="showIngresar">
                 <div class="panel-heading text-center"><strong>Ingresar nuevo</strong></div>
                 <div class="panel-body">
                   <div class="form-group">

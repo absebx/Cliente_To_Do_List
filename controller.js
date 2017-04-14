@@ -19,6 +19,9 @@ angular.module("indexApp",[])
     $scope.tickets={};
     $scope.newTicket={};
     $scope.date=new Date();
+    //datos de Utilidades
+    $scope.showIngresar = false;
+    $scope.showBtnIngresar = false;
     //obtener usuarios de la base de datos
     $http.get("http://localhost:27697/api/users")
       .then(function(data){
@@ -29,6 +32,9 @@ angular.module("indexApp",[])
 
     //funcion para obtener board y tickets del usuario
     $scope.getBoard = function(user){
+      if(!$scope.showBtnIngresar){
+        $scope.showBtnIngresar=true;
+      }
       $scope.selectedUser = user;
       //llamar a api por el board
       $http.get("http://localhost:27697/api/boards/byuser/"+user.Id)
