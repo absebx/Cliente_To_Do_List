@@ -171,6 +171,18 @@ angular.module("indexApp",[])
 
     $scope.editRelation=function(relation){
       relation.Date = new Date();
+      $http.put("http://localhost:27697/api/ticketstatus/"+relation.Id,{
+        Id: relation.Id,
+        Date: relation.Date,
+        IdTicket : relation.IdTicket,
+        idStatus : relation.idStatus
+      })
+        .then(function(data){
+          //cargar board otra vez
+          $scope.getBoard($scope.selectedUser);
+        },function(err){
+          console.log(err);
+        });
     }
 
 
