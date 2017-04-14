@@ -146,6 +146,8 @@ angular.module("indexApp",[])
         ColorStatus: $scope.ColorStatus
       })
         .then(function(data){
+          //modificar relacion
+          $scope.editRelation($scope.selectedTicketRelation);
           //cargar board otra vez
           $scope.getBoard($scope.selectedUser);
           //resetear ticketSeleccionado
@@ -162,10 +164,13 @@ angular.module("indexApp",[])
       $http.get("http://localhost:27697/api/ticketstatus/byticket/"+id)
         .then(function(data){
           $scope.selectedTicketRelation = data.data;
-          console.log($scope.selectedTicketRelation);
         },function(err){
           console.log(err);
         });
+    }
+
+    $scope.editRelation=function(relation){
+      relation.Date = new Date();
     }
 
 
