@@ -53,11 +53,16 @@
             <!--Mostrar todos los tickets-->
             <div class="tickets row">
               <div class="col-sm-6 col-md-4" ng-repeat="ticket in tickets">
-                <div class="panel panel-default ticket">
+                <div class="panel panel-default">
                   <div class="panel-heading">
-                    <h4 class="text-primary ticket-title">{{ticket.Title}}</h4>
+                    <span class="ticket-title text-primary">
+                      {{ticket.Title}}
+                    </span>
+                    <a class="ticket-delete" ng-click="deleteTicket(ticket.Id)">
+                      <i class="fa fa-times-circle" aria-hidden="true"></i>
+                    </a>
                   </div>
-                  <div class="panel-body">
+                  <div class="panel-body ticket">
                     <p class="text-right">{{ticket.Date | date: 'd/M/yyyy'}}</p>
                     <p class="ticket-description">{{ticket.Description}}</p>
                     <p class="text-right">Tiempo estimado: {{ticket.EstimatedTime}}</p>

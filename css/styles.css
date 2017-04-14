@@ -5,14 +5,29 @@
   background-color: #EEE5E9; }
 
 .ticket {
-  height: 250px; }
+  height: 200px; }
 
 .ticket-description {
   overflow-y: auto;
   height: 90px; }
 
 .ticket-title {
-  margin: 0; }
+  font-weight: bold;
+  font-size: 1.15em;
+  float: left; }
 
 .ticket-status {
   font-weight: bold; }
+
+.ticket-delete {
+  color: #ED4337;
+  font-size: 1.20em;
+  float: right; }
+
+.ticket-delete:hover {
+  color: #ED4337;
+  cursor: pointer; }
+
+.panel-heading {
+  height: 60px;
+  overflow: hidden; }
