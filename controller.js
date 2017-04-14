@@ -5,6 +5,7 @@ angular.module("indexApp",[])
       //obtener atributos del objetos
       attrs.$observe('colorStatus',function(value){
         element.css({
+          //se establece el color de fondo del ststus
           'background-color': value
         });
       })
@@ -86,6 +87,13 @@ angular.module("indexApp",[])
         });
     }
 
-
-
+    $scope.deleteTicket = function(id){
+      $http.delete("http://localhost:27697/api/tickets/"+id)
+        .then(function(data){
+          //cuando se ejecute actualizar
+          $scope.getBoard($scope.selectedUser);
+        },function(err){
+          console.log(err);
+        });
+    }
   });
