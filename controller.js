@@ -90,6 +90,8 @@ angular.module("indexApp",[])
           $scope.newTicket={};
           //Cargar otra vez el board
           $scope.getBoard($scope.selectedUser);
+          //ocultar formulario ingreso
+          $scope.showIngresar = false;
         },function(err){
           console.log(err);
         });
@@ -107,8 +109,32 @@ angular.module("indexApp",[])
 
     $scope.modify = function(ticket){
       $scope.selectedTicket = ticket;
-      console.log($scope.selectedTicket);
       $scope.showModificar = true;
+    }
+
+    $scope.editTicket = function(){
+      //enviar por put los datos del ticket
+      $http.put("http://localhost:27697/api/tickets/"+$scope.selectedTicket.Id,{
+        //ingresar los datos del ticket
+        Id: $scope.selectedTicket.Id,
+        Title: $scope.selectedTicket.Title,
+        Description: $scope.selectedTicket.Description,
+        Date: $scope.selectedTicket.Date,
+        EstimatedTime: $scope.selectedTicket.EstimatedTime,
+        BoardID: $scope.selectedTicket.BoardID,
+        StatusName: $scope.selectedTicket.StatusName,
+        ColorStatus: $scope.ColorStatus
+      })
+        .then(function(data){
+          //cargar board otra vez
+          $scope.getBoard($scope.selectedUser);
+          //resetear ticketSeleccionado
+          $scope.selectedTicket={};
+          //ocultar formulario modificar
+          $scope.showModificar = false;
+        },function(err){
+          console.log(err);
+        });
     }
 
 
