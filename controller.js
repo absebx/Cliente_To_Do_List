@@ -1,4 +1,15 @@
 angular.module("indexApp",[])
+  //directiva para color del status
+  .directive('colorStatus',function(){
+    return function(scope,element,attrs){
+      //obtener atributos del objetos
+      attrs.$observe('colorStatus',function(value){
+        element.css({
+          'background-color': value
+        });
+      })
+    }
+  })
   //index controller
   .controller("indexController",function($scope,$http,$location){
     //datos seleccionados

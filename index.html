@@ -62,7 +62,9 @@
                     <p class="ticket-description">{{ticket.Description}}</p>
                     <p class="text-right">Tiempo estimado: {{ticket.EstimatedTime}}</p>
                     <p class="text-right">
-                      <span class="label label-default ticket-status">{{ticket.StatusName}}</span>
+                      <span class="label label-default ticket-status" color-status="{{ticket.ColorStatus}}">
+                        {{ticket.StatusName}}
+                      </span>
                     </p>
                   </div>
                 </div>
