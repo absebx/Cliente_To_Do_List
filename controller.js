@@ -30,7 +30,7 @@ angular.module("indexApp",[])
     $scope.showModificar = false;
     //datos de filtros
     $scope.filterSelectedStatus = "todos";
-    $scope.filterSelectedDate;
+    $scope.filterSelectedDate = new Date();
 
     //obtener usuarios de la base de datos
     $http.get($scope.server+"/users")
@@ -207,6 +207,10 @@ angular.module("indexApp",[])
 
         });
       });
+    }
+
+    $scope.filterForDate = function(){
+      console.log($scope.filterSelectedDate);
     }
 
     $scope.resetFilters=function(){
