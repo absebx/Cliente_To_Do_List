@@ -50,8 +50,9 @@
           <h4 class="text-center">{{selectedBoard.Name}}</h4>
           <div class="col-sm-8 col-md-8">
             <!--Filtros-->
+
             <!--Filtro por estado-->
-            <div class="form-group">
+            <div class="form-group" ng-show="showControllers">
               <select class="form-control" placeholder="Status" ng-model="filterSelectedStatus" ng-change="filterForStatus()"
               ng-selected="filterSelectedStatus">
                 <option value="todos">todos</option>
@@ -119,7 +120,7 @@
             <!--Fin formulario modificar ticket-->
 
             <!--Formulario nuevo ticket-->
-            <button class="btn btn-primary btn-agregar" ng-click="showIngresar=!showIngresar" ng-show="showBtnIngresar">
+            <button class="btn btn-primary btn-agregar" ng-click="showIngresar=!showIngresar" ng-show="showControllers">
               Agregar
             </button>
             <div class="col-sm-12 col-md-12">

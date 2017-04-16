@@ -26,7 +26,7 @@ angular.module("indexApp",[])
     $scope.allStatus={};
     //datos de Utilidades
     $scope.showIngresar = false;
-    $scope.showBtnIngresar = false;
+    $scope.showControllers = false;
     $scope.showModificar = false;
     //datos de filtros
     $scope.filterSelectedStatus = "todos";
@@ -50,9 +50,12 @@ angular.module("indexApp",[])
 
     //funcion para obtener board y tickets del usuario
     $scope.getBoard = function(user){
-      if(!$scope.showBtnIngresar){
-        $scope.showBtnIngresar=true;
+      if(!$scope.showControllers){
+        $scope.showControllers=true;
       }
+      //resetar filtros
+      $scope.resetFilters();
+      //Dejar usuario seleccionado
       $scope.selectedUser = user;
       //llamar a api por el board
       $http.get($scope.server+"/boards/byuser/"+user.Id)
@@ -186,18 +189,29 @@ angular.module("indexApp",[])
 
     //funciones para los filtros
     $scope.filterForStatus = function(){
+      //cargar tickets otra vez
+      let prom = $scope.getTicketByBoard();
+      prom.then(data => {
+        $scope.$apply(function(){
+          //si es todos simplemente cargarlos todos
+          if($scope.filterSelectedStatus == "todos"){
+            $scope.tickets = data;
+          }else{
+            //filtrar tickets por nombre del tipo
+            $scope.tickets = data.filter(function(item){
+              if (item.StatusName == $scope.filterSelectedStatus){
+                return true;
+              }
+            });
+          }
+
+        });
+      });
     }
 
-    /*
-    //cargar otra vez los tickets
-    let prom = $scope.getTicketByBoard();
-    //despues que se carguen
-    prom.then((res) => {
-      console.log("inicio eliminacion");
-      $scope.tickets = {};
-      console.log("eliminados");
-    });
-    */
+    $scope.resetFilters=function(){
+      $scope.filterSelectedStatus = "todos";
+    }
 
 
 
