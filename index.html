@@ -70,19 +70,22 @@
                 </div>
 
                 <div class="col-sm-4 col-md-4 todo-control">
-                  <!--menu ordenar por-->
-                  <div class="dropdown order-by">
-                    <label for="">Ordenar</label>
-                    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                      Ordenar por
-                      <span class="caret"></span>
-                    </button>
-                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                      <li><a href="#">Fecha</a></li>
-                      <li><a href="#">Estado</a></li>
-                    </ul>
-                  </div>
-                  <!--Fin menu ordenar por-->
+                    <!--menu ordenar por-->
+                    <div class="dropdown order-by">
+                      <div class="col-sm-12 col-md-12">
+                        <label for="">Ordenar</label>
+                      </div>
+
+                      <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                        Ordenar por
+                        <span class="caret"></span>
+                      </button>
+                      <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                        <li><a href="#" ng-click="orderByDate()">Fecha</a></li>
+                        <li><a href="#" ng-click="orderByStatus()">Estado</a></li>
+                      </ul>
+                    </div>
+                    <!--Fin menu ordenar por-->
                 </div>
               </div>
 

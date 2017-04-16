@@ -239,6 +239,15 @@ angular.module("indexApp",[])
       $scope.filterSelectedStatus = "todos";
       $scope.filterSelectedDate = new Date();
     }
-    
+
+    //funciones para orden
+
+    $scope.orderByDate = function(){
+
+    }
+    $scope.orderByStatus = function(){
+      
+    }
+
 
   });
