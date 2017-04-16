@@ -49,6 +49,17 @@
         <!--Content-->
           <h4 class="text-center">{{selectedBoard.Name}}</h4>
           <div class="col-sm-8 col-md-8">
+            <!--Filtros-->
+            <!--Filtro por estado-->
+            <div class="form-group">
+              <select class="form-control" placeholder="Status" ng-model="filterSelectedStatus" ng-change="filterForStatus()"
+              ng-selected="filterSelectedStatus">
+                <option value="todos">todos</option>
+                <option ng-repeat="status in allStatus" value="{{status.Name}}">{{status.Name}}</option>
+              </select>
+            </div>
+
+
 
             <!--Mostrar todos los tickets-->
             <div class="tickets row">

@@ -13,6 +13,8 @@ angular.module("indexApp",[])
   })
   //index controller
   .controller("indexController",function($scope,$http,$location){
+    //IMPORTANTE: Cambiar servidor en caso de cambio
+    $scope.server="http://localhost:27697/api";
     //datos seleccionados
     $scope.selectedUser={};
     $scope.selectedBoard={};
@@ -26,8 +28,12 @@ angular.module("indexApp",[])
     $scope.showIngresar = false;
     $scope.showBtnIngresar = false;
     $scope.showModificar = false;
+    //datos de filtros
+    $scope.filterSelectedStatus = "todos";
+    $scope.filterSelectedDate;
+
     //obtener usuarios de la base de datos
-    $http.get("http://localhost:27697/api/users")
+    $http.get($scope.server+"/users")
       .then(function(data){
         $scope.users=data.data;
       },function(err){
@@ -35,7 +41,7 @@ angular.module("indexApp",[])
       });
 
     //obtener estados de la base de datos
-    $http.get("http://localhost:27697/api/status")
+    $http.get($scope.server+"/status")
       .then(function(data){
         $scope.allStatus=data.data;
       },function(err){
@@ -49,7 +55,7 @@ angular.module("indexApp",[])
       }
       $scope.selectedUser = user;
       //llamar a api por el board
-      $http.get("http://localhost:27697/api/boards/byuser/"+user.Id)
+      $http.get($scope.server+"/boards/byuser/"+user.Id)
         .then(function(data){
           //seleccionar board
           $scope.selectedBoard=data.data;
@@ -62,9 +68,10 @@ angular.module("indexApp",[])
 
     //funcion para obtener los tickets de un board
     $scope.getTicketByBoard = function(){
-      $http.get("http://localhost:27697/api/tickets/byBoard/"+$scope.selectedBoard.Id)
+      $http.get($scope.server+"/tickets/byBoard/"+$scope.selectedBoard.Id)
         .then(function(data){
           $scope.tickets = data.data;
+          console.log("cargando tickets");
         },function(err){
           console.log(err);
         });
@@ -90,7 +97,7 @@ angular.module("indexApp",[])
     //funcion para agregar tickets en base al usuario y board seleccionado
     $scope.addTicket = function(){
       $scope.date=new Date();
-      $http.post("http://localhost:27697/api/tickets",{
+      $http.post($scope.server+"/tickets",{
         Id: 1,
         Title: $scope.newTicket.Title,
         Description: $scope.newTicket.Description,
@@ -112,7 +119,7 @@ angular.module("indexApp",[])
 
     //funcion para eliminar ticket
     $scope.deleteTicket = function(id){
-      $http.delete("http://localhost:27697/api/tickets/"+id)
+      $http.delete($scope.server+"/tickets/"+id)
         .then(function(data){
           //cuando se ejecute actualizar
           $scope.getBoard($scope.selectedUser);
@@ -134,7 +141,7 @@ angular.module("indexApp",[])
     //funcion para modificar ticket seleccionado
     $scope.editTicket = function(){
       //enviar por put los datos del ticket
-      $http.put("http://localhost:27697/api/tickets/"+$scope.selectedTicket.Id,{
+      $http.put($scope.server+"/tickets/"+$scope.selectedTicket.Id,{
         //ingresar los datos del ticket
         Id: $scope.selectedTicket.Id,
         Title: $scope.selectedTicket.Title,
@@ -159,9 +166,10 @@ angular.module("indexApp",[])
         });
     }
 
+    //obtener relacion por id del ticket
     $scope.getTicketRelation=function(id){
       //llamar api para obtener relacion por id del ticket
-      $http.get("http://localhost:27697/api/ticketstatus/byticket/"+id)
+      $http.get($scope.server+"/ticketstatus/byticket/"+id)
         .then(function(data){
           $scope.selectedTicketRelation = data.data;
         },function(err){
@@ -169,9 +177,10 @@ angular.module("indexApp",[])
         });
     }
 
+    //guardar relaciones cuando se actualizan
     $scope.editRelation=function(relation){
       relation.Date = new Date();
-      $http.put("http://localhost:27697/api/ticketstatus/"+relation.Id,{
+      $http.put($scope.server+"/ticketstatus/"+relation.Id,{
         Id: relation.Id,
         Date: relation.Date,
         IdTicket : relation.IdTicket,
@@ -183,6 +192,16 @@ angular.module("indexApp",[])
         },function(err){
           console.log(err);
         });
+    }
+
+    //funciones para los filtros
+    $scope.filterForStatus = function(){
+      //cargar otra vez los tickets
+      $scope.getTicketByBoard();
+      if($scope.filterSelectedStatus != "todos"){
+        console.log($scope.filterSelectedStatus);
+        $scope.tickets = {};
+      }
     }
 
 
