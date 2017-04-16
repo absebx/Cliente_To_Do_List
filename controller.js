@@ -67,32 +67,29 @@ angular.module("indexApp",[])
     }
 
     //funcion para obtener los tickets de un board
-    $scope.getTicketByBoard = function(){
+    /*$scope.getTicketByBoard = function(){
       $http.get($scope.server+"/tickets/byBoard/"+$scope.selectedBoard.Id)
         .then(function(data){
           $scope.tickets = data.data;
-          console.log("cargando tickets");
+          console.log("tickets Cargados");
         },function(err){
           console.log(err);
         });
+    }*/
+
+    //promesa para obtener tickets
+    $scope.getTicketByBoard = function(){
+      return $scope.promGetTickets = new Promise((resolve, reject) => {
+        $http.get($scope.server+"/tickets/byBoard/"+$scope.selectedBoard.Id)
+          .then(function(data){
+            $scope.tickets = data.data;
+            console.log("tickets Cargados");
+            resolve("tickets cargados");
+          },function(err){
+            console.log(err);
+          });
+      });
     }
-
-    //funcion para obtener relaciones por tickets
-    //*IMPORTANTE*: funcion no utilizada
-
-    /*$scope.getTicketRelations = function(){
-      console.log($scope.tickets);
-      for(var key in $scope.tickets){
-        var obj = $scope.tickets[key];
-        for (var prop in obj){
-          if(obj.hasOwnProperty(prop)){
-            console.log(prop + "="+obj[prop]);
-          }
-        }
-      }
-    }
-    */
-
 
     //funcion para agregar tickets en base al usuario y board seleccionado
     $scope.addTicket = function(){
@@ -197,11 +194,11 @@ angular.module("indexApp",[])
     //funciones para los filtros
     $scope.filterForStatus = function(){
       //cargar otra vez los tickets
-      $scope.getTicketByBoard();
-      if($scope.filterSelectedStatus != "todos"){
-        console.log($scope.filterSelectedStatus);
-        $scope.tickets = {};
-      }
+      let prom = $scope.getTicketByBoard();
+      //despues que se carguen
+      prom.then((res) => {
+        console.log("holi");
+      });
     }
 
 
