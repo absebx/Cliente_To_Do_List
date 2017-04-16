@@ -60,31 +60,24 @@ angular.module("indexApp",[])
           //seleccionar board
           $scope.selectedBoard=data.data;
           //obtener tickets
-          $scope.getTicketByBoard();
+          let prom =$scope.getTicketByBoard();
+          prom.then((tickets) => {
+            //se usa $apply para que estos datos estén dentro del contexto de angularjs
+            $scope.$apply(function(){
+              $scope.tickets = tickets;
+            });
+          })
         },function(err){
           console.log(err);
         });
     }
-
-    //funcion para obtener los tickets de un board
-    /*$scope.getTicketByBoard = function(){
-      $http.get($scope.server+"/tickets/byBoard/"+$scope.selectedBoard.Id)
-        .then(function(data){
-          $scope.tickets = data.data;
-          console.log("tickets Cargados");
-        },function(err){
-          console.log(err);
-        });
-    }*/
-
     //promesa para obtener tickets
     $scope.getTicketByBoard = function(){
-      return $scope.promGetTickets = new Promise((resolve, reject) => {
+      return new Promise((resolve, reject) => {
         $http.get($scope.server+"/tickets/byBoard/"+$scope.selectedBoard.Id)
           .then(function(data){
-            $scope.tickets = data.data;
-            console.log("tickets Cargados");
-            resolve("tickets cargados");
+            //$scope.tickets = data.data;
+            resolve(data.data);
           },function(err){
             console.log(err);
           });
@@ -193,13 +186,18 @@ angular.module("indexApp",[])
 
     //funciones para los filtros
     $scope.filterForStatus = function(){
-      //cargar otra vez los tickets
-      let prom = $scope.getTicketByBoard();
-      //despues que se carguen
-      prom.then((res) => {
-        console.log("holi");
-      });
     }
+
+    /*
+    //cargar otra vez los tickets
+    let prom = $scope.getTicketByBoard();
+    //despues que se carguen
+    prom.then((res) => {
+      console.log("inicio eliminacion");
+      $scope.tickets = {};
+      console.log("eliminados");
+    });
+    */
 
 
 
