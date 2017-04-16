@@ -52,7 +52,7 @@
             <!--Filtros-->
             <div class="container-fluid" ng-show="showControllers">
               <div class="row">
-                <div class="col-sm-6 col-md-6">
+                <div class="col-sm-4 col-md-4 todo-control">
                   <div class="form-group">
                     <label>Estado</label>
                     <select class="form-control" placeholder="Status" ng-model="filterSelectedStatus" ng-change="filterForStatus()"
@@ -62,16 +62,33 @@
                     </select>
                   </div>
                 </div>
-                <div class="col-sm-6 col-md-6">
+                <div class="col-sm-4 col-md-4 todo-control">
                   <div class="form-group">
                     <label>Fecha</label>
-                    <input type="date" class="form-control" ng-model="filterSelectedDate" ng-change="filterForDate()"> 
+                    <input type="date" class="form-control" ng-model="filterSelectedDate" ng-change="filterForDate()">
                   </div>
                 </div>
+
+                <div class="col-sm-4 col-md-4 todo-control">
+                  <!--menu ordenar por-->
+                  <div class="dropdown order-by">
+                    <label for="">Ordenar</label>
+                    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                      Ordenar por
+                      <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                      <li><a href="#">Fecha</a></li>
+                      <li><a href="#">Estado</a></li>
+                    </ul>
+                  </div>
+                  <!--Fin menu ordenar por-->
+                </div>
               </div>
+
+
             </div>
             <!--fin filtros-->
-
 
 
 

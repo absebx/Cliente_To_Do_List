@@ -239,8 +239,6 @@ angular.module("indexApp",[])
       $scope.filterSelectedStatus = "todos";
       $scope.filterSelectedDate = new Date();
     }
-
-
-
+    
 
   });
