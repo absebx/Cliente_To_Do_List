@@ -12,7 +12,7 @@ angular.module("indexApp",[])
     }
   })
   //index controller
-  .controller("indexController",function($scope,$http,$location){
+  .controller("indexController",function($scope,$http,$location,$filter){
     //IMPORTANTE: Cambiar servidor en caso de cambio
     $scope.server="http://localhost:27697/api";
     //datos seleccionados
@@ -68,6 +68,7 @@ angular.module("indexApp",[])
             //se usa $apply para que estos datos estén dentro del contexto de angularjs
             $scope.$apply(function(){
               $scope.tickets = tickets;
+              console.log(tickets);
             });
           })
         },function(err){
@@ -189,6 +190,8 @@ angular.module("indexApp",[])
 
     //funciones para los filtros
     $scope.filterForStatus = function(){
+      //dejar filtro de fecha por default
+      $scope.filterSelectedDate = new Date();
       //cargar tickets otra vez
       let prom = $scope.getTicketByBoard();
       prom.then(data => {
@@ -204,17 +207,37 @@ angular.module("indexApp",[])
               }
             });
           }
-
         });
       });
     }
 
     $scope.filterForDate = function(){
-      console.log($scope.filterSelectedDate);
+      //dejar filtro por default
+      $scope.filterSelectedStatus = "todos";
+      //tomar fecha seleccionada y filtrarla
+      let date = $filter('date')($scope.filterSelectedDate, 'dd/MM/yyyy');
+      //ejecutar promesa de obtener tickets
+      let prom = $scope.getTicketByBoard();
+      prom.then(data => {
+        $scope.$apply(function(){
+          //filtrar los datos de llegada
+          $scope.tickets = data.filter(function(item){
+            //filtrar filtrar fecha del item
+            let itemDate = $filter('date')(item.Date, 'dd/MM/yyyy');
+            if(itemDate == date){
+              //si las fechas son iguales retorna verdadero y se queda en el arreglo
+              return true;
+            }
+
+          });
+
+        });
+      });
     }
 
     $scope.resetFilters=function(){
       $scope.filterSelectedStatus = "todos";
+      $scope.filterSelectedDate = new Date();
     }
 
 
