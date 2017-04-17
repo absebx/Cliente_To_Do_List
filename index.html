@@ -29,69 +29,74 @@
         </div>
       </div>
     </div>
+
     <!--Main page-->
-    <div class="container-fluid main-container">
+    <div class="container-fluid main-container" >
       <row>
         <!--Aside-->
-        <div class="col-sm-4 col-md-4 aside">
-          <h4>Seleccione usuario</h4>
-          <ul class="list-group">
-            <li class="list-group-item" ng-repeat="user in users">
-              <div class="text-left">
-                <strong>{{user.Name}}</strong>
+          <div class="col-sm-4 col-md-4">
+            <!--lista de usuarios-->
+            <div class="list-group todo-aside">
+              <div class="list-group-item">
+                <h3>
+                  <i class="fa fa-user-circle-o" aria-hidden="true"></i>
+                  Usuarios
+                </h3>
               </div>
-              <div  class="text-right">
-                <a ng-click="getBoard(user)" class="btn btn-primary">Ir</a>
+              <button class="list-group-item" ng-repeat="user in users" ng-click="getBoard(user)"
+              ng-class="{'active' : user.Id == selectedUser.Id}">
+                <i class="fa fa-user" aria-hidden="true"></i>
+                {{user.Name}}
+              </button>
+              <!--Filtros-->
+              <div class="list-group-item">
+                <h3>
+                  <i class="fa fa-filter" aria-hidden="true"></i>
+                  Filtros
+                </h3>
               </div>
-            </li>
-          </ul>
-        </div>
+              <!--Filtro por estado-->
+              <div class="list-group-item" ng-class="{disabled: !areUser}">
+                <div class="form-group">
+                  <label>Estado</label>
+                  <select class="form-control" placeholder="Status" ng-model="filterSelectedStatus" ng-change="filterForStatus()"
+                  ng-selected="filterSelectedStatus" ng-disabled="!areUser">
+                    <option value="todos">todos</option>
+                    <option ng-repeat="status in allStatus" value="{{status.Name}}">{{status.Name}}</option>
+                  </select>
+                </div>
+              </div>
+              <!--Filtro por fecha-->
+              <div class="list-group-item" ng-class="{disabled: !areUser}">
+                <div class="form-group">
+                  <label>Fecha</label>
+                  <input type="date" class="form-control" ng-model="filterSelectedDate" ng-change="filterForDate()"
+                  ng-disabled="!areUser">
+                </div>
+              </div>
+              <!--ordernar por fecha-->
+              <div class="list-group-item" ng-class="{disabled: !areUser}">
+                <div class="form-group dropdown">
+                  <label>Ordenar</label><br>
+                  <button class="btn btn-default dropdown-toggle" type="button"
+                  id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true"
+                  aria-expanded="true" ng-disabled="!areUser">
+                    Ordenar por
+                    <span class="caret"></span>
+                  </button>
+                  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                    <li><a href="#" ng-click="orderByDate()">Fecha</a></li>
+                    <li><a href="#" ng-click="orderByStatus()">Estado</a></li>
+                  </ul>
+                </div>
+              </div>
+            </div><!--fin de list-group-->
+          </div>
         <!--Content-->
           <h4 class="text-center">{{selectedBoard.Name}}</h4>
+          <!--Contenido de la pagina-->
+          
           <div class="col-sm-8 col-md-8">
-            <!--Filtros-->
-            <div class="container-fluid" ng-show="showControllers">
-              <div class="row">
-                <div class="col-sm-4 col-md-4 todo-control">
-                  <div class="form-group">
-                    <label>Estado</label>
-                    <select class="form-control" placeholder="Status" ng-model="filterSelectedStatus" ng-change="filterForStatus()"
-                    ng-selected="filterSelectedStatus">
-                      <option value="todos">todos</option>
-                      <option ng-repeat="status in allStatus" value="{{status.Name}}">{{status.Name}}</option>
-                    </select>
-                  </div>
-                </div>
-                <div class="col-sm-4 col-md-4 todo-control">
-                  <div class="form-group">
-                    <label>Fecha</label>
-                    <input type="date" class="form-control" ng-model="filterSelectedDate" ng-change="filterForDate()">
-                  </div>
-                </div>
-
-                <div class="col-sm-4 col-md-4 todo-control">
-                    <!--menu ordenar por-->
-                    <div class="dropdown order-by">
-                      <div class="col-sm-12 col-md-12">
-                        <label for="">Ordenar</label>
-                      </div>
-
-                      <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                        Ordenar por
-                        <span class="caret"></span>
-                      </button>
-                      <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                        <li><a href="#" ng-click="orderByDate()">Fecha</a></li>
-                        <li><a href="#" ng-click="orderByStatus()">Estado</a></li>
-                      </ul>
-                    </div>
-                    <!--Fin menu ordenar por-->
-                </div>
-              </div>
-
-
-            </div>
-            <!--fin filtros-->
 
 
 

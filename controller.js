@@ -28,6 +28,7 @@ angular.module("indexApp",[])
     $scope.showIngresar = false;
     $scope.showControllers = false;
     $scope.showModificar = false;
+    $scope.areUser = false;
     //datos de filtros
     $scope.filterSelectedStatus = "todos";
     $scope.filterSelectedDate = new Date();
@@ -53,6 +54,8 @@ angular.module("indexApp",[])
       if(!$scope.showControllers){
         $scope.showControllers=true;
       }
+      //Hay usuarioSeleccionado
+      $scope.areUser = true;
       //resetar filtros
       $scope.resetFilters();
       //Dejar usuario seleccionado
