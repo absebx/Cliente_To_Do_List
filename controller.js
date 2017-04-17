@@ -243,10 +243,34 @@ angular.module("indexApp",[])
     //funciones para orden
 
     $scope.orderByDate = function(){
+      //obtener promesa para cargar tickets
+      let prom = $scope.getTicketByBoard();
+      prom.then(data => {
+        //cuando cargue los tickets va a ordenar
+        $scope.$apply(function(){
+          $scope.tickets = data.sort(function(a,b){
+            a = $scope.formaterDatabaseDate(a).getTime();
+            b = $scope.formaterDatabaseDate(b).getTime();
+            if(a < b)
+              return -1;
+            if(a > b)
+              return 1;
+            return 0;
+          });
+        });
+        console.log("ordenados");
+      });
+    }
 
+    //formatear fecha de base de datos
+    $scope.formaterDatabaseDate = function(date){
+      //obtener fechas
+      date =  $filter('date')(date, 'yyyy-MM-ddThh:mm:ssZ');
+      date = new Date(date);
+      return date;
     }
     $scope.orderByStatus = function(){
-      
+
     }
 
 
