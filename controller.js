@@ -249,8 +249,8 @@ angular.module("indexApp",[])
         //cuando cargue los tickets va a ordenar
         $scope.$apply(function(){
           $scope.tickets = data.sort(function(a,b){
-            a = $scope.formaterDatabaseDate(a).getTime();
-            b = $scope.formaterDatabaseDate(b).getTime();
+            a.Date = $scope.formaterDatabaseDate(a.Date).getTime();
+            b.Date = $scope.formaterDatabaseDate(b.Date).getTime();
             if(a < b)
               return -1;
             if(a > b)
@@ -269,8 +269,26 @@ angular.module("indexApp",[])
       date = new Date(date);
       return date;
     }
-    $scope.orderByStatus = function(){
 
+    //ordenar tickets por status
+    $scope.orderByStatus = function(){
+      //obtener promesa para cargar tickets
+      let prom = $scope.getTicketByBoard();
+      prom.then(data => {
+        $scope.$apply(function(){
+          //ordenar por estado
+          $scope.tickets = data.sort(function(a,b){
+            a = a.StatusName;
+            b = b.StatusName;
+            if(a < b)
+              return -1;
+            if(a > b)
+              return 1;
+            return 0;
+          });
+        });
+        console.log("ordenados por estado");
+      });
     }
 
 
